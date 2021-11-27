@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojurescript {:mvn/version "1.10.758"}
+        metosin/malli {:mvn/version "0.6.1"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.861"}}}
+           :run-tests {:main-opts ["-m" "kaocha.runner"]}
+           :watch-tests {:main-opts ["-m" "kaocha.runner"
+                                     "--watch"
+                                     "--fail-fast"
+                                     "--no-randomize"]}}}
