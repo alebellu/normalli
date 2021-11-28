@@ -1,2 +1,7 @@
 #kaocha/v1
-{:plugins [:kaocha.plugin/notifier]}
+{:plugins [:kaocha.plugin/notifier]
+ :tests [{:id :unit
+          :test-paths ["test"]}
+         {:id :generated
+          :test-paths  ["target/test-doc-blocks/test"]
+          :kaocha.hooks/post-load-test [lread.test-doc-blocks.kaocha.hooks/fail-on-no-tests-found]}]}

@@ -1,0 +1,17 @@
+name: ci
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: clojure:tools-deps
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Generate doc tests
+      run: clj -X:gen-doc-tests
+    - name: Run tests
+      run: clj -M:test:run-tests

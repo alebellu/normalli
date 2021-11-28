@@ -1,11 +1,17 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
         org.clojure/clojurescript {:mvn/version "1.10.758"}
+        clj-kondo/clj-kondo {:mvn/version "2021.10.19"}
         metosin/malli {:mvn/version "0.6.1"}}
- :aliases {:test {:extra-paths ["test"]
-                  :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.861"}}}
+ :aliases {:test {:extra-paths ["test" "target/test-doc-blocks/test"]
+                  :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.945"}}}
            :run-tests {:main-opts ["-m" "kaocha.runner"]}
            :watch-tests {:main-opts ["-m" "kaocha.runner"
                                      "--watch"
                                      "--fail-fast"
-                                     "--no-randomize"]}}}
+                                     "--no-randomize"]}
+           :gen-doc-tests {:extra-deps {com.github.lread/test-doc-blocks {:mvn/version "1.0.166-alpha"}}
+                           ;; for -X syntax support specify exec-fn
+                           :exec-fn lread.test-doc-blocks/gen-tests
+                           ;; for -M syntax support specify main-opts
+                           :main-opts ["-m" "lread.test-doc-blocks" "gen-tests"]}}}
